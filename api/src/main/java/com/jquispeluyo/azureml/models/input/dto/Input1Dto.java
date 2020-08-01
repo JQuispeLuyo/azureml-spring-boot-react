@@ -9,27 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Input1Dto {
 
-    private String embarazos;
+    private Integer embarazos;
+    private Integer glucosa;
+    private Integer presion_sanguinea;
+    private Integer pliegue_cutaneo;
+    private Integer insulina;
+    private Double indice_de_masa_corporal;
+    private Double pedigri_diabetes;
+    private Integer edad;
 
-    private String glucosa;
-
-    private String presion_sanguinea;
-
-    private String pliegue_cutaneo;
-
-    private String insulina;
-
-    private String indice_de_masa_corporal;
-
-    private String pedigri_diabetes;
-
-    private String edad;
-
-    private String diabetes;
-
-    private String medicacion_previa;
-
-    private String observaciones;
-
-    private String fecha_de_diagnostico;
 }

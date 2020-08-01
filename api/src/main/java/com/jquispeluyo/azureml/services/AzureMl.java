@@ -5,5 +5,4 @@ import com.jquispeluyo.azureml.models.output.dto.PayloadOutDto;
 
 public interface AzureMl {
     PayloadOutDto predict (PayloadDto obj);
-    PayloadOutDto predictOnlyResult (PayloadDto obj);
 }

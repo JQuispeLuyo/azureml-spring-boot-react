@@ -15,12 +15,8 @@ public class Predict {
 
     @PostMapping("/predict")
     public PayloadOutDto predict(@RequestBody PayloadDto obj){
+        System.out.println(obj);
         return azureMl.predict(obj);
-    }
-
-    @PostMapping("/predict/only-result")
-    public PayloadOutDto predictOnlyResult(@RequestBody PayloadDto obj){
-        return azureMl.predictOnlyResult(obj);
     }
 
 }

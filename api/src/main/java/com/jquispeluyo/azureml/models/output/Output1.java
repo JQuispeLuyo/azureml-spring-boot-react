@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Output1 extends Input1 {
+public class Output1 {
 
     @JsonProperty("Scored Labels")
     private String scored_labels;

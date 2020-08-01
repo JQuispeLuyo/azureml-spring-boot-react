@@ -11,38 +11,27 @@ import lombok.NoArgsConstructor;
 public class Input1 {
 
     @JsonProperty("Embarazos")
-    private String embarazos;
+    private Integer embarazos;
 
     @JsonProperty("Glucosa")
-    private String glucosa;
+    private Integer glucosa;
 
     @JsonProperty("Presión sanguínea")
-    private String presion_sanguinea;
+    private Integer presion_sanguinea;
 
     @JsonProperty("Pliegue cutáneo")
-    private String pliegue_cutaneo;
+    private Integer pliegue_cutaneo;
 
     @JsonProperty("Insulina")
-    private String insulina;
+    private Integer insulina;
 
     @JsonProperty("Índice de masa corporal")
-    private String indice_de_masa_corporal;
+    private Double indice_de_masa_corporal;
 
     @JsonProperty("Pedigrí diabetes")
-    private String pedigrí_diabetes;
+    private Double pedigrí_diabetes;
 
     @JsonProperty("Edad")
-    private String edad;
+    private Integer edad;
 
-    @JsonProperty("Diabetes")
-    private String diabetes;
-
-    @JsonProperty("Medicación previa")
-    private String medicacion_previa;
-
-    @JsonProperty("Observaciones")
-    private String observaciones;
-
-    @JsonProperty("Fecha de diagnóstico")
-    private String fecha_de_diagnostico;
 }
