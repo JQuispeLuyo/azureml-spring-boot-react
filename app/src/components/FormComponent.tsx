@@ -8,8 +8,6 @@ import HealingIcon from '@material-ui/icons/Healing';
 import Typography from '@material-ui/core/Typography';
 import makeStyles from './makeStylesCustom';
 import Container from '@material-ui/core/Container';
-import MenuItem from '@material-ui/core/MenuItem';
-import moment from 'moment'
 
 //Alert
 import Button from '@material-ui/core/Button';
@@ -17,10 +15,11 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-import { KeyboardDatePicker } from "@material-ui/pickers";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Input1 } from './DiabetesInterface';
+
+import { NumberFormatCustom, NumberFormatDecimalCustom } from './FormikField/custom/NumberFormatCustom';
 
 const useStyles = makeStyles
 
@@ -28,7 +27,7 @@ export default function FormComponent() {
 
     const classes = useStyles();
 
-    const { register, errors, handleSubmit, control } = useForm<Input1>();
+    const { register, errors, handleSubmit } = useForm<Input1>();
 
     const [output, setOutput] = useState("");
 
@@ -45,10 +44,6 @@ export default function FormComponent() {
 
     const onSubmit = (data: Input1) => {
         setLoading(true);
-        let fec: any = data.fecha_de_diagnostico;
-        data.fecha_de_diagnostico = typeof (fec) == 'string'
-            ? fec
-            : moment(fec._d).format('MM-DD-YYYY')
         let payload: Object = {
             inputs: {
                 input1: [data],
@@ -57,7 +52,7 @@ export default function FormComponent() {
         }
         console.log(payload);
 
-        fetch('http://localhost:8080/api/predict/only-result', {
+        fetch('http://localhost:8080/api/predict', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +65,7 @@ export default function FormComponent() {
                 setLoading(false);
                 setOutput(`Usted ${data.results.output1[0].scored_labels} tiene diabetes`);
                 setOpen(true);
-                
+
             })
             .catch((error) => {
                 console.error("ERROR: ", error);
@@ -110,28 +105,32 @@ export default function FormComponent() {
                 </Typography>
 
                 <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
+
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                type="number"
-                                size="small"
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
                                 id="embarazos"
                                 label="Embarazos"
                                 name="embarazos"
-                                autoComplete="embarazos"
+                                variant="outlined"
+                                margin="normal"
+                                size="small"
+                                required
+                                fullWidth
                                 autoFocus
                                 error={errors.embarazos ? true : false}
                                 helperText={errors.embarazos ? errors.embarazos.message : ""}
-                                inputRef={register({ required: "Campo requerido", max: { value: 999, message: "Numero muy grande" } })}
+                                inputRef={register({    required: "Campo requerido", 
+                                                        max: { value: 999, message: "Numero muy grande" },
+                                                        maxLength: {value: 3, message:"leasdas"}
+                                                    })}
+                                InputProps={{
+                                    inputComponent: NumberFormatCustom as any,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                type="number"
                                 size="small"
                                 variant="outlined"
                                 margin="normal"
@@ -141,15 +140,16 @@ export default function FormComponent() {
                                 label="Glucosa"
                                 name="glucosa"
                                 autoComplete="glucosa"
-                                autoFocus
                                 error={errors.glucosa ? true : false}
                                 helperText={errors.glucosa ? errors.glucosa.message : ""}
                                 inputRef={register({ required: "Campo requerido", maxLength: 10 })}
+                                InputProps={{
+                                    inputComponent: NumberFormatCustom as any,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                type="number"
                                 size="small"
                                 variant="outlined"
                                 margin="normal"
@@ -159,15 +159,16 @@ export default function FormComponent() {
                                 label="Presion Sanguinea"
                                 name="presion_sanguinea"
                                 autoComplete="presion_sanguinea"
-                                autoFocus
                                 error={errors.presion_sanguinea ? true : false}
                                 helperText={errors.presion_sanguinea ? errors.presion_sanguinea.message : ""}
                                 inputRef={register({ required: "Campo requerido", max: { value: 999, message: "Numero muy grande" } })}
+                                InputProps={{
+                                    inputComponent: NumberFormatCustom as any,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                type="number"
                                 size="small"
                                 variant="outlined"
                                 margin="normal"
@@ -177,15 +178,16 @@ export default function FormComponent() {
                                 label="Pliegue Cutaneo"
                                 name="pliegue_cutaneo"
                                 autoComplete="pliegue_cutaneo"
-                                autoFocus
                                 error={errors.pliegue_cutaneo ? true : false}
                                 helperText={errors.pliegue_cutaneo ? errors.pliegue_cutaneo.message : ""}
                                 inputRef={register({ required: "Campo requerido", max: { value: 999, message: "Numero muy grande" } })}
+                                InputProps={{
+                                    inputComponent: NumberFormatCustom as any,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                type="number"
                                 size="small"
                                 variant="outlined"
                                 margin="normal"
@@ -195,15 +197,16 @@ export default function FormComponent() {
                                 label="Insulina"
                                 name="insulina"
                                 autoComplete="insulina"
-                                autoFocus
                                 error={errors.insulina ? true : false}
                                 helperText={errors.insulina ? errors.insulina.message : ""}
                                 inputRef={register({ required: "Campo requerido", max: { value: 999, message: "Numero muy grande" } })}
+                                InputProps={{
+                                    inputComponent: NumberFormatCustom as any,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                type="number"
                                 size="small"
                                 variant="outlined"
                                 margin="normal"
@@ -213,15 +216,16 @@ export default function FormComponent() {
                                 label="I. Masa Corporal"
                                 name="indice_de_masa_corporal"
                                 autoComplete="indice_de_masa_corporal"
-                                autoFocus
                                 error={errors.indice_de_masa_corporal ? true : false}
                                 helperText={errors.indice_de_masa_corporal ? errors.indice_de_masa_corporal.message : ""}
                                 inputRef={register({ required: "Campo requerido", max: { value: 999, message: "Numero muy grande" } })}
+                                InputProps={{
+                                    inputComponent: NumberFormatDecimalCustom as any,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                type="number"
                                 size="small"
                                 variant="outlined"
                                 margin="normal"
@@ -231,15 +235,16 @@ export default function FormComponent() {
                                 label="Pedigri Diabetes"
                                 name="pedigri_diabetes"
                                 autoComplete="pedigri_diabetes"
-                                autoFocus
                                 error={errors.pedigri_diabetes ? true : false}
                                 helperText={errors.pedigri_diabetes ? errors.pedigri_diabetes.message : ""}
                                 inputRef={register({ required: "Campo requerido", max: { value: 999, message: "Numero muy grande" } })}
+                                InputProps={{
+                                    inputComponent: NumberFormatDecimalCustom as any,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                type="number"
                                 size="small"
                                 variant="outlined"
                                 margin="normal"
@@ -249,130 +254,31 @@ export default function FormComponent() {
                                 label="Edad"
                                 name="edad"
                                 autoComplete="edad"
-                                autoFocus
                                 error={errors.edad ? true : false}
                                 helperText={errors.edad ? errors.edad.message : ""}
                                 inputRef={register({ required: "Campo requerido", max: { value: 999, message: "Numero muy grande" } })}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <TextField
-                                type="number"
-                                size="small"
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="diabetes"
-                                label="Diabetes"
-                                name="diabetes"
-                                autoComplete="diabetes"
-                                autoFocus
-                                select
-                                inputRef={register}
-                                defaultValue="No"
-                            >
-                                {['No', 'Sí'].map(x => (<MenuItem key={x} value={x}> {x} </MenuItem>))}
-                            </TextField>
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <TextField
-                                type="number"
-                                size="small"
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="medicacion_previa"
-                                label="Medicacion Previa"
-                                name="medicacion_previa"
-                                autoComplete="medicacion_previa"
-                                autoFocus
-                                inputRef={register({ required: "Campo requerido", max: { value: 999, message: "Numero muy grande" } })}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <TextField
-                                type="number"
-                                size="small"
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="observaciones"
-                                label="Observaciones"
-                                name="observaciones"
-                                autoComplete="observaciones"
-                                autoFocus
-                                inputRef={register({ required: "Campo requerido", max: { value: 999, message: "Numero muy grande" } })}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <Controller
-                                name="fecha_de_diagnostico"
-                                rules={{ required: true }}
-                                control={control}
-
-                                // here the magic happens
-                                initialFocusedDate={null}
-                                defaultValue={new Date()}
-
-                                as={
-                                    <KeyboardDatePicker
-                                        size="small"
-                                        error={errors.fecha_de_diagnostico ? true : false}
-                                        helperText={errors.fecha_de_diagnostico ? errors.fecha_de_diagnostico.message : ""}
-                                        autoOk
-                                        variant="inline"
-                                        inputVariant="outlined"
-                                        format="DD/MM/yyyy"
-                                        margin="normal"
-                                        id="fecha_de_diagnostico"
-                                        label="Fec. diagnostico"
-                                        name="fecha_de_diagnostico"
-                                        onChange={() => { }}
-                                        value={() => { }}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
-                                    />
-                                }
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            {/* <KeyboardDatePicker
-                                size="small"
-                                autoOk
-                                variant="inline"
-                                inputVariant="outlined"
-                                format="DD/MM/yyyy"
-                                margin="normal"
-                                id="fecha_de_diagnostico"
-                                label="Fec. diagnostico"
-                                name="fecha_de_diagnostico"
-                                value={selectedDate}
-                                onChange={date => handleChange(date)}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change date',
+                                InputProps={{
+                                    inputComponent: NumberFormatCustom as any,
                                 }}
-                            /> */}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            {
+                                loading ?
+                                    "Loading..."
+                                    :
+                                    <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.submit}
+                                    >
+                                        Consultar
+                            </Button>
+                            }
                         </Grid>
                     </Grid>
-                    {
-                        loading ?
-                            "Loading..."
-                            :
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                            >
-                                Consultar
-                            </Button>
-                    }
-
                 </form>
             </div>
         </Container>

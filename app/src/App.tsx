@@ -1,14 +1,11 @@
 import React from 'react';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils  from '@date-io/moment';
-import FormComponent from './components/FormComponent';
+//import FormComponent from './components/FormComponent';
+import { IndexForm } from './components/IndexForm';
 
 function App() {
   return (
     <div>
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <FormComponent />
-      </MuiPickersUtilsProvider>
+        <IndexForm/>
     </div>
 
   );

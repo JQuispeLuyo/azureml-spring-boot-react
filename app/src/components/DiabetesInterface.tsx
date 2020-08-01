@@ -1,6 +1,6 @@
 export interface DiabetesForm {
   inputs: Inputs;
-  globalParameters: GlobalParameters;
+  globalParameters: any;
 }
 
 export interface GlobalParameters {
@@ -11,16 +11,12 @@ export interface Inputs {
 }
 
 export interface Input1 {
-  embarazos: string;
-  glucosa: string;
-  presion_sanguinea: string;
-  pliegue_cutaneo: string;
-  insulina: string;
-  indice_de_masa_corporal: string;
-  pedigri_diabetes: string;
-  edad: string;
-  diabetes: string;
-  medicacion_previa: string;
-  observaciones: string;
-  fecha_de_diagnostico: string;
+  embarazos: number;
+  glucosa: number;
+  presion_sanguinea: number;
+  pliegue_cutaneo: number;
+  insulina: number;
+  indice_de_masa_corporal: number;
+  pedigri_diabetes: number;
+  edad: number;
 }

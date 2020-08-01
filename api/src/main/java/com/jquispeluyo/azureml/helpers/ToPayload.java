@@ -22,11 +22,7 @@ public class ToPayload {
                                                 x.getInsulina(),
                                                 x.getIndice_de_masa_corporal(),
                                                 x.getPedigri_diabetes(),
-                                                x.getEdad(),
-                                                x.getDiabetes(),
-                                                x.getMedicacion_previa(),
-                                                x.getObservaciones(),
-                                                x.getFecha_de_diagnostico()
+                                                x.getEdad()
                                         )
                                 ).collect(Collectors.toList())
                 ),
