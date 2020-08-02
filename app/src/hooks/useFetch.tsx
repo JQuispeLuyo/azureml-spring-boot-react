@@ -60,6 +60,16 @@ export const useFetch = (url: string, initialvalue: any) => {
                     }
                 }
             })
+            .catch((e)=>{
+                console.log(e);
+                const out:any = `Ubo un error: ${e}`;
+                setState({
+                    data: out,
+                    loading: false,
+                    error: null
+                });
+                callback();
+            })
     }
 
     return { state, callApi };

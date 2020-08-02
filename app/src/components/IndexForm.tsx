@@ -1,15 +1,25 @@
 import React from 'react'
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import {
-    Container, CssBaseline, Grid,
-    Typography, Avatar, Button,
-    Snackbar, IconButton
-} from '@material-ui/core';
 
+//Material Components
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+
+//Material Icons
 import CloseIcon from '@material-ui/icons/Close';
 import HealingIcon from '@material-ui/icons/Healing';
 
+//Config
+import { BASE_URL } from './../config/config';
+
+//CustomHooks
 import { useFetch } from '../hooks/useFetch';
 import { useSnackbar } from '../hooks/useSnackbar';
 
@@ -19,7 +29,6 @@ import { FormikDecimalNumberField } from './FormikField/FormikDecimalNumberField
 import makeStyles from './makeStylesCustom';
 
 import { Input1 } from './DiabetesInterface';
-
 
 const useStyles = makeStyles
 
@@ -66,7 +75,8 @@ export const IndexForm: React.FC = () => {
     };
 
     //API
-    const {state, callApi } = useFetch(`http://localhost:8080/api/predict`, initialValues);
+    
+    const {state, callApi } = useFetch(`${BASE_URL}/api/predict`, initialValues);
     const { loading, data } = state;
 
     //Snackbar
