@@ -49,7 +49,29 @@ const NumberFormatDecimalCustom = (props: NumberFormatCustomProps) => {
     );
 }
 
+const NumberFormatThreeDecimalCustom = (props: NumberFormatCustomProps) => {
+    const { inputRef, onChange, ...other } = props;
+
+    return (
+        <NumberFormat
+            {...other}
+            allowNegative={false}
+            getInputRef={inputRef}
+            decimalScale={3}
+            onValueChange={(values) => {
+                onChange({
+                    target: {
+                        name: props.name,
+                        value: values.value,
+                    },
+                });
+            }}
+        />
+    );
+}
+
 export {
     NumberFormatCustom,
-    NumberFormatDecimalCustom
+    NumberFormatDecimalCustom,
+    NumberFormatThreeDecimalCustom
 }

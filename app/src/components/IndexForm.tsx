@@ -25,16 +25,18 @@ import { useSnackbar } from '../hooks/useSnackbar';
 
 import { FormikNumberField } from './FormikField/FormikNumberField';
 import { FormikDecimalNumberField } from './FormikField/FormikDecimalNumberField'; 
+import { FormikThreeDecimalNumberField } from './FormikField/FormikThreeDecimalNumberField';
 
 import makeStyles from './makeStylesCustom';
 
 import { Input1 } from './DiabetesInterface';
 
+
 const useStyles = makeStyles
 
 const SignupSchema = Yup.object().shape({
     embarazos: Yup.number()
-        .moreThan(0)
+        .moreThan(-1)
         .required('Required'),
     glucosa: Yup.number()
         .moreThan(0)
@@ -163,7 +165,7 @@ export const IndexForm: React.FC = () => {
                                                 label="Insulina" />
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
-                                            <FormikDecimalNumberField
+                                            <FormikThreeDecimalNumberField
                                                 touched={touched.pedigri_diabetes}
                                                 error={errors.pedigri_diabetes}
                                                 name="pedigri_diabetes"
