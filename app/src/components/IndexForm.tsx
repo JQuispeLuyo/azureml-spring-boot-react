@@ -75,7 +75,7 @@ export const IndexForm: React.FC = () => {
     };
 
     //API
-    
+    console.log("llama",process.env);
     const {state, callApi } = useFetch(`${BASE_URL}/api/predict`, initialValues);
     const { loading, data } = state;
 
