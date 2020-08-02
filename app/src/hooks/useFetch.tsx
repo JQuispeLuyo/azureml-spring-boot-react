@@ -27,8 +27,7 @@ export const useFetch = (url: string, initialvalue: any) => {
             },
             globalParameters: {}
         }
-        console.log(JSON.stringify(payload));
-
+        
         setState({ data: null, loading: true, error: null });
 
         fetch(url, {
@@ -41,7 +40,6 @@ export const useFetch = (url: string, initialvalue: any) => {
             .then((resp) => resp.json())
             .then((data) => {
                 if (isMounted.current) {
-                    console.log("resp api ", data);
                     if(data.results){
                         const out:any = `Usted ${data.results.output1[0].scored_labels} tiene dibetes`;
                         setState({
@@ -61,7 +59,6 @@ export const useFetch = (url: string, initialvalue: any) => {
                 }
             })
             .catch((e)=>{
-                console.log(e);
                 const out:any = `Ubo un error: ${e}`;
                 setState({
                     data: out,
