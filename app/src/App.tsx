@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexForm } from './components/IndexForm';
+import { IndexForm } from './ml/components/IndexForm';
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
-import { DiabetesForm } from '../components/DiabetesInterface';
+import { Inputdata } from '../models/Ml';
 
-export const useFetch = (url: string, initialvalue: any) => {
+export const useFetchMl = (url: string, initialvalue: any) => {
 
     /*
         Esta variable puede ser cambiada
@@ -19,14 +19,8 @@ export const useFetch = (url: string, initialvalue: any) => {
         }
     }, [])
 
-    const callApi = (body: any, callback: any) => {
+    const callApi = (body: Inputdata, callback: any) => {
 
-        const payload: DiabetesForm = {
-            inputs: {
-                input1: [body],
-            },
-            globalParameters: {}
-        }
         
         setState({ data: null, loading: true, error: null });
 
@@ -35,14 +29,14 @@ export const useFetch = (url: string, initialvalue: any) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(body)
         })
             .then((resp) => resp.json())
             .then((data) => {
                 if (isMounted.current) {
-                    if(data.results){
-                        console.log(data.results);
-                        const out:any = `Usted ${data.results.output1[0].scored_labels} tiene dibetes | ${data.results.output1[0].scored_probabilities}`;
+                    if(data){
+                        console.log(data);
+                        const out:any = `${data.output} | ${data.probability}`;
                         setState({
                             data: out,
                             loading: false,

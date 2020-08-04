@@ -14,79 +14,91 @@ import IconButton from '@material-ui/core/IconButton';
 
 //Material Icons
 import CloseIcon from '@material-ui/icons/Close';
-import HealingIcon from '@material-ui/icons/Healing';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 //Config
-import { BASE_URL } from './../config/config';
+import { BASE_URL } from './../../config/config';
 
 //CustomHooks
-import { useFetch } from '../hooks/useFetch';
+import { useFetchMl } from '../hooks/useFetchMl';
 import { useSnackbar } from '../hooks/useSnackbar';
 
 import { FormikNumberField } from './FormikField/FormikNumberField';
-import { FormikDecimalNumberField } from './FormikField/FormikDecimalNumberField'; 
-import { FormikThreeDecimalNumberField } from './FormikField/FormikThreeDecimalNumberField';
+import FormikSelect from './FormikField/FormikSelectField';
 
 import makeStyles from './makeStylesCustom';
 
-import { Input1 } from './DiabetesInterface';
+import { Inputdata } from '../models/Ml';
+
 
 
 const useStyles = makeStyles
 
 const SignupSchema = Yup.object().shape({
-    embarazos: Yup.number()
+    ingresos: Yup.number()
         .moreThan(-1)
         .required('Required'),
-    glucosa: Yup.number()
-        .moreThan(0)
+    ahorros: Yup.number()
+        .moreThan(-1)
         .required('Required'),
-    presion_sanguinea: Yup.number()
-        .moreThan(0)
+    hijos: Yup.number()
+        .moreThan(-1)
         .required('Required'),
-    pliegue_cutaneo: Yup.number()
-        .moreThan(0)
+    trabajo: Yup.number()
+        .moreThan(-1)
         .required('Required'),
-    insulina: Yup.number()
-        .moreThan(0)
-        .required('Required'),
-    indice_de_masa_corporal: Yup.number()
-        .moreThan(0)
-        .required('Required'),
-    pedigri_diabetes: Yup.number()
-        .moreThan(0)
-        .required('Required'),
-    edad: Yup.number()
-        .moreThan(0)
+    financiar: Yup.number()
+        .moreThan(-1)
         .required('Required'),
 });
+
+interface FormikSelectItem {
+    label: string;
+    value: number;
+}
+
+const positionItems: FormikSelectItem[] = [
+    {
+      label: "Sin Empleo",
+      value: 0
+    },
+    {
+      label: "Autonomo - freelance",
+      value: 1
+    },
+    {
+      label: "Empleado",
+      value: 2
+    },
+    {
+      label: "Empresario",
+      value: 3
+    }
+  ];
 
 export const IndexForm: React.FC = () => {
 
     const classes = useStyles();
 
-    const initialValues: Input1 = {
-        embarazos: 0,
-        glucosa: 0,
-        presion_sanguinea: 0,
-        pliegue_cutaneo: 0,
-        insulina: 0,
-        indice_de_masa_corporal: 0,
-        pedigri_diabetes: 0,
-        edad: 0,
+    const initialValues: Inputdata = {
+        ingresos: 0,
+        ahorros: 0,
+        hijos: 0,
+        trabajo: 0,
+        financiar: 0
     };
 
     //API
-    const {state, callApi } = useFetch(`${BASE_URL}/api/diabetes/predict`, initialValues);
+    const { state, callApi } = useFetchMl(`${BASE_URL}/api/bigml/predict`, initialValues);
     const { loading, data } = state;
 
     //Snackbar
-    const { open, handleClose, handleOpen} = useSnackbar();
+    const { open, handleClose, handleOpen } = useSnackbar();
 
     //Submit
-    const handleSubmit = (values: any) => { 
+    const handleSubmit = (values: any) => {
         handleClose();
-        callApi( values ,() => handleOpen());
+        callApi(values, () => handleOpen());
     }
 
     return (
@@ -108,7 +120,7 @@ export const IndexForm: React.FC = () => {
                 }
             />
 
-            
+
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -121,69 +133,56 @@ export const IndexForm: React.FC = () => {
                             <div className={classes.paper}>
 
                                 <Avatar className={classes.avatar}>
-                                    <HealingIcon />
+                                    <AttachMoneyIcon />
                                 </Avatar>
                                 <Typography component="h1" variant="h5">
-                                    ¿Tienes Diabetes?
+                                    ¿Comprar o alquilar una casa?
                                 </Typography>
-                                
+
                                 <Form className={classes.form}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12} sm={4}>
                                             <FormikNumberField
-                                                touched={touched.embarazos}
-                                                error={errors.embarazos}
-                                                name="embarazos"
-                                                label="Embarazos" />
+                                                touched={touched.ingresos}
+                                                error={errors.ingresos}
+                                                name="ingresos"
+                                                label="Ingresos" />
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
                                             <FormikNumberField
-                                                touched={touched.edad}
-                                                error={errors.edad}
-                                                name="edad"
-                                                label="Edad" />
+                                                touched={touched.ahorros}
+                                                error={errors.ahorros}
+                                                name="ahorros"
+                                                label="Ahorros" />
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
                                             <FormikNumberField
-                                                touched={touched.glucosa}
-                                                error={errors.glucosa}
-                                                name="glucosa"
-                                                label="Glucosa" />
+                                                touched={touched.hijos}
+                                                error={errors.hijos}
+                                                name="hijos"
+                                                label="Hijos" />
                                         </Grid>
+                                        {/* <Grid item xs={12} sm={4}>
+                                            <FormikNumberField
+                                                touched={touched.trabajo}
+                                                error={errors.trabajo}
+                                                name="trabajo"
+                                                label="Trabajo" />
+                                        </Grid> */}
                                         <Grid item xs={12} sm={4}>
-                                            <FormikDecimalNumberField
-                                                touched={touched.indice_de_masa_corporal}
-                                                error={errors.indice_de_masa_corporal}
-                                                name="indice_de_masa_corporal"
-                                                label="I. Masa Coporal" />
+                                            <FormikSelect
+                                                name="trabajo"
+                                                label="Trabajo"
+                                                items={positionItems}
+                                                required
+                                            />
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
                                             <FormikNumberField
-                                                touched={touched.insulina}
-                                                error={errors.insulina}
-                                                name="insulina"
-                                                label="Insulina" />
-                                        </Grid>
-                                        <Grid item xs={12} sm={4}>
-                                            <FormikThreeDecimalNumberField
-                                                touched={touched.pedigri_diabetes}
-                                                error={errors.pedigri_diabetes}
-                                                name="pedigri_diabetes"
-                                                label="Pedigri Diabetes" />
-                                        </Grid>
-                                        <Grid item xs={12} sm={4}>
-                                            <FormikNumberField
-                                                touched={touched.pliegue_cutaneo}
-                                                error={errors.pliegue_cutaneo}
-                                                name="pliegue_cutaneo"
-                                                label="Pliegue Cutaneo" />
-                                        </Grid>
-                                        <Grid item xs={12} sm={4}>
-                                            <FormikNumberField
-                                                touched={touched.presion_sanguinea}
-                                                error={errors.presion_sanguinea}
-                                                name="presion_sanguinea"
-                                                label="Presion Sanguinea" />
+                                                touched={touched.financiar}
+                                                error={errors.financiar}
+                                                name="financiar"
+                                                label="Financiar" />
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={12} sm={12}>
@@ -192,7 +191,7 @@ export const IndexForm: React.FC = () => {
                                                 "Loading..."
                                                 :
                                                 <Button
-                                                    disabled={!dirty || !isValid} 
+                                                    disabled={!dirty || !isValid}
                                                     type="submit"
                                                     fullWidth
                                                     variant="contained"
