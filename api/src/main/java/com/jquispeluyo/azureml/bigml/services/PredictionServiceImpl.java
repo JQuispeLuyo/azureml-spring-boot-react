@@ -58,7 +58,7 @@ public class PredictionServiceImpl implements PredictionService {
                 Objects.requireNonNull(response.getBody()).getProbability()
         );
 
-        if(response.getBody().getOutput() == 1){
+        if(response.getBody().getOutput() == 0){
             responseOutput.setOutput("Alquilar");
         }else {
             responseOutput.setOutput("Comprar");
