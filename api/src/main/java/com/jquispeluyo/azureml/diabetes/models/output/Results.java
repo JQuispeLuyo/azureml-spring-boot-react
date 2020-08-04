@@ -1,4 +1,4 @@
-package com.jquispeluyo.azureml.models.output;
+package com.jquispeluyo.azureml.diabetes.models.output;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

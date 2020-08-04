@@ -1,13 +1,13 @@
-package com.jquispeluyo.azureml.controllers;
+package com.jquispeluyo.azureml.diabetes.controllers;
 
-import com.jquispeluyo.azureml.models.input.dto.PayloadDto;
-import com.jquispeluyo.azureml.models.output.dto.PayloadOutDto;
-import com.jquispeluyo.azureml.services.AzureMl;
+import com.jquispeluyo.azureml.diabetes.models.input.dto.PayloadDto;
+import com.jquispeluyo.azureml.diabetes.models.output.dto.PayloadOutDto;
+import com.jquispeluyo.azureml.diabetes.services.AzureMl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("diabetes")
 @CrossOrigin
 public class Predict {
 

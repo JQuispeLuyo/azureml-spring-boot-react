@@ -1,9 +1,9 @@
-package com.jquispeluyo.azureml.helpers;
+package com.jquispeluyo.azureml.diabetes.helpers;
 
-import com.jquispeluyo.azureml.models.output.PayloadOut;
-import com.jquispeluyo.azureml.models.output.dto.Output1Dto;
-import com.jquispeluyo.azureml.models.output.dto.PayloadOutDto;
-import com.jquispeluyo.azureml.models.output.dto.ResultsDto;
+import com.jquispeluyo.azureml.diabetes.models.output.PayloadOut;
+import com.jquispeluyo.azureml.diabetes.models.output.dto.Output1Dto;
+import com.jquispeluyo.azureml.diabetes.models.output.dto.PayloadOutDto;
+import com.jquispeluyo.azureml.diabetes.models.output.dto.ResultsDto;
 
 import java.util.stream.Collectors;
 

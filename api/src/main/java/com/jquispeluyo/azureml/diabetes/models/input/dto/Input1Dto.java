@@ -1,4 +1,4 @@
-package com.jquispeluyo.azureml.models.input.dto;
+package com.jquispeluyo.azureml.diabetes.models.input.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

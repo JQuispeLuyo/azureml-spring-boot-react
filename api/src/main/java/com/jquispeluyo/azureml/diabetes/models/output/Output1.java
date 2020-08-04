@@ -1,7 +1,6 @@
-package com.jquispeluyo.azureml.models.output;
+package com.jquispeluyo.azureml.diabetes.models.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jquispeluyo.azureml.models.input.Input1;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.jquispeluyo.azureml.models.input;
+package com.jquispeluyo.azureml.diabetes.models.input;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

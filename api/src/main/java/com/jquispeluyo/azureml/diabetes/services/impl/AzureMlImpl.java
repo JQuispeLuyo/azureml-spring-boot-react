@@ -1,12 +1,12 @@
-package com.jquispeluyo.azureml.services.impl;
+package com.jquispeluyo.azureml.diabetes.services.impl;
 
-import com.jquispeluyo.azureml.helpers.ToPayload;
-import com.jquispeluyo.azureml.helpers.ToPayloadOutDto;
-import com.jquispeluyo.azureml.models.input.Payload;
-import com.jquispeluyo.azureml.models.output.PayloadOut;
-import com.jquispeluyo.azureml.models.input.dto.PayloadDto;
-import com.jquispeluyo.azureml.models.output.dto.PayloadOutDto;
-import com.jquispeluyo.azureml.services.AzureMl;
+import com.jquispeluyo.azureml.diabetes.helpers.ToPayload;
+import com.jquispeluyo.azureml.diabetes.helpers.ToPayloadOutDto;
+import com.jquispeluyo.azureml.diabetes.models.input.Payload;
+import com.jquispeluyo.azureml.diabetes.models.output.PayloadOut;
+import com.jquispeluyo.azureml.diabetes.models.input.dto.PayloadDto;
+import com.jquispeluyo.azureml.diabetes.models.output.dto.PayloadOutDto;
+import com.jquispeluyo.azureml.diabetes.services.AzureMl;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

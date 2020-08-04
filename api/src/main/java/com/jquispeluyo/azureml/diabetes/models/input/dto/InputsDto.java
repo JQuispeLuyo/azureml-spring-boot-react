@@ -1,12 +1,14 @@
-package com.jquispeluyo.azureml.models.output.dto;
+package com.jquispeluyo.azureml.diabetes.models.input.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PayloadOutDto {
-    ResultsDto results;
+public class InputsDto {
+    List<Input1Dto> input1;
 }
