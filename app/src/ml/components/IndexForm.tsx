@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field, FieldProps } from 'formik';
 import * as Yup from 'yup';
 
 //Material Components
@@ -59,22 +59,22 @@ interface FormikSelectItem {
 
 const positionItems: FormikSelectItem[] = [
     {
-      label: "Sin Empleo",
-      value: 0
+        label: "Sin Empleo",
+        value: 0
     },
     {
-      label: "Autonomo - freelance",
-      value: 1
+        label: "Autonomo - freelance",
+        value: 1
     },
     {
-      label: "Empleado",
-      value: 2
+        label: "Empleado",
+        value: 2
     },
     {
-      label: "Empresario",
-      value: 3
+        label: "Empresario",
+        value: 3
     }
-  ];
+];
 
 export const IndexForm: React.FC = () => {
 
@@ -85,11 +85,12 @@ export const IndexForm: React.FC = () => {
         ahorros: 0,
         hijos: 0,
         trabajo: 0,
-        financiar: 0
+        financiar: 0,
+        plataforma: "A"
     };
 
     //API
-    const { state, callApi } = useFetchMl(`${BASE_URL}/api/bigml/predict`, initialValues);
+    const { state, callApi } = useFetchMl(`${BASE_URL}`);
     const { loading, data } = state;
 
     //Snackbar
@@ -98,7 +99,11 @@ export const IndexForm: React.FC = () => {
     //Submit
     const handleSubmit = (values: any) => {
         handleClose();
-        callApi(values, () => handleOpen());
+
+        const platform = values.plataforma === "A" ? "azureml" : "bigml";
+        console.log(platform, values);
+
+        callApi(`/api/${platform}/predict`, values, () => handleOpen());
     }
 
     return (
@@ -126,7 +131,7 @@ export const IndexForm: React.FC = () => {
                 onSubmit={handleSubmit}
                 validationSchema={SignupSchema}
             >
-                {({ dirty, isValid, errors, touched }) => {
+                {({ values, dirty, isValid, errors, touched, setFieldValue }) => {
                     return (
                         <Container component="main" maxWidth="sm">
                             <CssBaseline />
@@ -162,13 +167,6 @@ export const IndexForm: React.FC = () => {
                                                 name="hijos"
                                                 label="Hijos" />
                                         </Grid>
-                                        {/* <Grid item xs={12} sm={4}>
-                                            <FormikNumberField
-                                                touched={touched.trabajo}
-                                                error={errors.trabajo}
-                                                name="trabajo"
-                                                label="Trabajo" />
-                                        </Grid> */}
                                         <Grid item xs={12} sm={4}>
                                             <FormikSelect
                                                 name="trabajo"
@@ -182,7 +180,7 @@ export const IndexForm: React.FC = () => {
                                                 touched={touched.financiar}
                                                 error={errors.financiar}
                                                 name="financiar"
-                                                label="Financiar" />
+                                                label="Costo de Casa" />
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={12} sm={12}>
@@ -201,6 +199,37 @@ export const IndexForm: React.FC = () => {
                                                     Consultar
                                                 </Button>
                                         }
+                                    </Grid>
+                                    <Grid item xs={12} sm={12}>
+                                        <Field name="plataforma">
+                                            {({ field, form, meta }: FieldProps) => (
+                                                <>
+                                                    <div className="radio-item">
+                                                        <input
+                                                            {...field}
+                                                            id="male"
+                                                            value="A"
+                                                            checked={field.value === 'A'}
+                                                            name="plataforma"
+                                                            type="radio"
+                                                        />
+                                                        <label htmlFor="male">azure</label>
+                                                    </div>
+
+                                                    <div className="radio-item">
+                                                        <input
+                                                            {...field}
+                                                            id="female"
+                                                            value="B"
+                                                            name="plataforma"
+                                                            checked={field.value === 'B'}
+                                                            type="radio"
+                                                        />
+                                                        <label htmlFor="female">bigml</label>
+                                                    </div>
+                                                </>
+                                            )}
+                                        </Field>
                                     </Grid>
                                 </Form>
                             </div>

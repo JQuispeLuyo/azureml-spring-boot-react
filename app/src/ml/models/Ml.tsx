@@ -4,6 +4,7 @@ export interface Inputdata {
   hijos: number;
   trabajo: number;
   financiar: number;
+  plataforma: string
 }
 
 export interface OutPredictionDto {

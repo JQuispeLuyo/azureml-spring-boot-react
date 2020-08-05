@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { Inputdata } from '../models/Ml';
 
-export const useFetchMl = (url: string, initialvalue: any) => {
+export const useFetchMl = (url: string) => {
 
     /*
         Esta variable puede ser cambiada
@@ -19,12 +19,12 @@ export const useFetchMl = (url: string, initialvalue: any) => {
         }
     }, [])
 
-    const callApi = (body: Inputdata, callback: any) => {
+    const callApi = (path: string, body: Inputdata, callback: any) => {
 
         
         setState({ data: null, loading: true, error: null });
 
-        fetch(url, {
+        fetch(url + path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
