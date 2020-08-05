@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestInput {
-    Double ingresos;
-    Double ahorros;
-    Double hijos;
-    Double trabajo;
-    Double financiar;
+    Integer ingresos;
+    Integer ahorros;
+    Integer hijos;
+    Integer trabajo;
+    Integer financiar;
 }

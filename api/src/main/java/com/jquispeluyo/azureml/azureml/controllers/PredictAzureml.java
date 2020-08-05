@@ -1,22 +1,22 @@
-package com.jquispeluyo.azureml.bigml.controllers;
+package com.jquispeluyo.azureml.azureml.controllers;
 
-import com.jquispeluyo.azureml.bigml.services.PredictionService;
+import com.jquispeluyo.azureml.azureml.services.PredictionAzuremlService;
 import com.jquispeluyo.azureml.common.RequestInput;
 import com.jquispeluyo.azureml.common.ResponseOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("bigml")
+@RequestMapping("azureml")
 @CrossOrigin
-public class PredictBigml {
+public class PredictAzureml {
 
     @Autowired
-    PredictionService predictionService;
+    PredictionAzuremlService predictionAzuremlService;
 
     @PostMapping("/predict")
     public ResponseOutput predict(@RequestBody RequestInput obj){
-        return predictionService.predict(obj);
+        return predictionAzuremlService.predict(obj);
     }
 
 }

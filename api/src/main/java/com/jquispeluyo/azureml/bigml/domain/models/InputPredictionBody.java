@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InputPrediccionBody {
+public class InputPredictionBody {
 
     private String model;
     private Input input_data;
