@@ -11,3 +11,7 @@ export interface OutPredictionDto {
     output: string,
     probability: number
 }
+
+export interface History {
+  predicts: Array<OutPredictionDto>
+}

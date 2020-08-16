@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { Inputdata } from '../models/Ml';
+import { Inputdata, OutPredictionDto } from '../models/Ml';
 
 export const useFetchMl = (url: string) => {
 
@@ -9,8 +9,9 @@ export const useFetchMl = (url: string) => {
     */
     const isMounted = useRef(true);
 
-    const [state, setState] = useState({ data: null, loading: false, error: null })
-
+    const [predicts, setPredicts] = useState<OutPredictionDto[]>([])
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState({message: ""});
 
     useEffect(() => {
         //Cambio a false cuando se desturye el componente
@@ -20,9 +21,8 @@ export const useFetchMl = (url: string) => {
     }, [])
 
     const callApi = (path: string, body: Inputdata, callback: any) => {
-
         
-        setState({ data: null, loading: true, error: null });
+        setLoading(true);
 
         fetch(url + path, {
             method: 'POST',
@@ -35,34 +35,21 @@ export const useFetchMl = (url: string) => {
             .then((data) => {
                 if (isMounted.current) {
                     if(data){
-                        console.log(data);
-                        const out:any = `${data.output} | ${data.probability}`;
-                        setState({
-                            data: out,
-                            loading: false,
-                            error: null
-                        })
+                        setPredicts([{output: data.output , probability: data.probability},...predicts])
+                        setLoading(false)
                         callback()
                     }else{
-                        setState({
-                            data: data.error,
-                            loading: false,
-                            error: null
-                        })
-                        callback()
+                        setError({message: "Not Found"})
+                        setLoading(false)
                     }
                 }
             })
             .catch((e)=>{
                 const out:any = `Ubo un error: ${e}`;
-                setState({
-                    data: out,
-                    loading: false,
-                    error: null
-                });
-                callback();
+                setError({message: out})
+                setLoading(false)
             })
     }
 
-    return { state, callApi };
+    return { predicts, loading, error, callApi };
 }

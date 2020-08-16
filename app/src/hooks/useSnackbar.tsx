@@ -8,6 +8,7 @@ export const useSnackbar = () => {
     // const isMounted = useRef(true);
     
     const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState("");
     const handleClose = (event?: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
         if (reason === 'clickaway') {
             return;
@@ -15,18 +16,12 @@ export const useSnackbar = () => {
         setOpen(false);
     };
 
-    const handleOpen = () => {
+    const handleOpen = (message?:string) => {
+        console.log(message);
+        
+        setMessage(message || "");
         setOpen(true);
     };
 
-    // useEffect(() => {
-    //     //Cambio a false cuando se desturye el componente
-    //     return () => {
-    //         isMounted.current = false;
-    //     }
-    // }, [])
-
-
-
-    return { open, handleClose, handleOpen};
+    return { open, handleClose, handleOpen, message};
 }
