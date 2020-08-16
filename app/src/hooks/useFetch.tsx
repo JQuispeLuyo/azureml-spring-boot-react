@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { DiabetesForm } from '../components/DiabetesInterface';
+import { DiabetesForm } from '../models/DiabetesInterface';
 
 export const useFetch = (url: string, initialvalue: any) => {
 

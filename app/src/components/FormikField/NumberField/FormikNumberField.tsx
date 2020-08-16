@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextField } from '@material-ui/core'
 import { Field, ErrorMessage } from 'formik'
-import { NumberFormatDecimalCustom } from './custom/NumberFormatCustom';
+import { NumberFormatCustom } from '../custom/NumberFormatCustom';
 
 interface FormikFieldProps {
     name: string,
@@ -10,7 +10,7 @@ interface FormikFieldProps {
     touched: any,
 }
 
-export const FormikDecimalNumberField: React.FC<FormikFieldProps> = ({ touched, error, name, label}) => {
+const FormikNumberField: React.FC<FormikFieldProps> = ({ touched, error, name, label }) => {
     return (
         <div>
             <Field
@@ -26,8 +26,10 @@ export const FormikDecimalNumberField: React.FC<FormikFieldProps> = ({ touched, 
                 error={error && touched ? true : false}
                 helperText={<ErrorMessage name={name}/>}
                 InputProps={{
-                    inputComponent: NumberFormatDecimalCustom as any,
+                    inputComponent: NumberFormatCustom as any,
                 }} />
         </div>
     )
 }
+
+export default FormikNumberField;

@@ -17,18 +17,18 @@ import CloseIcon from '@material-ui/icons/Close';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 //Config
-import { BASE_URL } from './../../config/config';
+import { BASE_URL } from '../../config/config';
 
 //CustomHooks
-import { useFetchMl } from '../hooks/useFetchMl';
-import { useSnackbar } from '../hooks/useSnackbar';
+import { useFetchMl } from '../../hooks/useFetchMl';
+import { useSnackbar } from '../../hooks/useSnackbar';
 
-import { FormikNumberField } from './FormikField/FormikNumberField';
-import FormikSelect from './FormikField/FormikSelectField';
+import { FormikNumberField } from '../../components/FormikField/NumberField';
+import { FormikSelect } from '../../components/FormikField/SelectField';
 
 import makeStyles from './makeStylesCustom';
 
-import { Inputdata } from '../models/Ml';
+import { Inputdata } from '../../models/Ml';
 
 
 

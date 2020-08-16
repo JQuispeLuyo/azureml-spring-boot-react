@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexForm } from './ml/components/IndexForm';
+import { IndexForm } from './Pages/ml/Predict';
 
 function App() {
   return (

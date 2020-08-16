@@ -1,0 +1,1 @@
+export { default as FormikThreeDecimalNumberField} from './FormikThreeDecimalNumberField';

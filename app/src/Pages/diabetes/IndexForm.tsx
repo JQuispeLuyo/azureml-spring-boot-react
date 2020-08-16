@@ -17,19 +17,19 @@ import CloseIcon from '@material-ui/icons/Close';
 import HealingIcon from '@material-ui/icons/Healing';
 
 //Config
-import { BASE_URL } from './../config/config';
+import { BASE_URL } from './../../config/config';
 
 //CustomHooks
-import { useFetch } from '../hooks/useFetch';
-import { useSnackbar } from '../hooks/useSnackbar';
+import { useFetch } from './../../hooks/useFetch';
+import { useSnackbar } from './../../hooks/useSnackbar';
 
-import { FormikNumberField } from './FormikField/FormikNumberField';
-import { FormikDecimalNumberField } from './FormikField/FormikDecimalNumberField'; 
-import { FormikThreeDecimalNumberField } from './FormikField/FormikThreeDecimalNumberField';
+import { FormikNumberField } from '../../components/FormikField/NumberField';
+import { FormikDecimalNumberField } from '../../components/FormikField/DecimalNumberField'; 
+import { FormikThreeDecimalNumberField } from '../../components/FormikField/ThreeDecimalNumber';
 
 import makeStyles from './makeStylesCustom';
 
-import { Input1 } from './DiabetesInterface';
+import { Input1 } from '../../models/DiabetesInterface';
 
 
 const useStyles = makeStyles
