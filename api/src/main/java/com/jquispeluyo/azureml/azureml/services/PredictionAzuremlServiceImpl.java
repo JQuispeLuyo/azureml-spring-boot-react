@@ -4,6 +4,7 @@ import com.jquispeluyo.azureml.azureml.domain.input.Input1;
 import com.jquispeluyo.azureml.azureml.domain.input.Inputs;
 import com.jquispeluyo.azureml.azureml.domain.input.Payload;
 import com.jquispeluyo.azureml.azureml.domain.output.OutPrediction;
+import com.jquispeluyo.azureml.common.Providers;
 import com.jquispeluyo.azureml.common.RequestInput;
 import com.jquispeluyo.azureml.common.ResponseOutput;
 
@@ -48,7 +49,8 @@ public class PredictionAzuremlServiceImpl implements PredictionAzuremlService {
 
         ResponseOutput responseOutput = new ResponseOutput(
                 "",
-                probability
+                probability,
+                Providers.AZURE
         );
 
         if(output == 0){

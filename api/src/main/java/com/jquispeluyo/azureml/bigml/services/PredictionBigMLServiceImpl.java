@@ -3,6 +3,7 @@ package com.jquispeluyo.azureml.bigml.services;
 import com.jquispeluyo.azureml.bigml.domain.dto.OutPredictionDto;
 import com.jquispeluyo.azureml.bigml.domain.models.Input;
 import com.jquispeluyo.azureml.bigml.domain.models.InputPredictionBody;
+import com.jquispeluyo.azureml.common.Providers;
 import com.jquispeluyo.azureml.common.RequestInput;
 import com.jquispeluyo.azureml.common.ResponseOutput;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Objects;
 
 @Service
-public class PredictionServiceImpl implements PredictionService {
+public class PredictionBigMLServiceImpl implements PredictionBigMLService {
 
     @Autowired RestTemplate restTemplate;
     HttpHeaders headers = new HttpHeaders();
@@ -55,7 +56,8 @@ public class PredictionServiceImpl implements PredictionService {
     private ResponseOutput responseToOutput( ResponseEntity<OutPredictionDto> response){
         ResponseOutput responseOutput = new ResponseOutput(
                 "",
-                Objects.requireNonNull(response.getBody()).getProbability()
+                Objects.requireNonNull(response.getBody()).getProbability(),
+                Providers.BIG_ML
         );
 
         if(response.getBody().getOutput() == 0){

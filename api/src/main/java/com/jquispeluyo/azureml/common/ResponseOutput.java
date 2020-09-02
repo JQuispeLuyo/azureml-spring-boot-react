@@ -11,5 +11,6 @@ public class ResponseOutput {
 
     private String output;
     private Double probability;
+    private Providers provider;
 
 }

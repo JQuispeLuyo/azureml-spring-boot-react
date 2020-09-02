@@ -1,11 +1,9 @@
 import React from 'react'
 
-import { Formik, Form, Field, FieldProps } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
 //Material Components
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
@@ -75,8 +73,7 @@ const MlForm = ({loading, handleSubmit}: any) => {
         ahorros: 0,
         hijos: 0,
         trabajo: 0,
-        financiar: 0,
-        plataforma: "A"
+        financiar: 0
     };
     
 
@@ -91,8 +88,7 @@ const MlForm = ({loading, handleSubmit}: any) => {
         >
             {({dirty, isValid, errors, touched }) => {
                 return (
-                    <Container component="main" maxWidth="sm">
-                        <CssBaseline />
+ 
                         <div className={classes.paper}>
 
                             <Avatar className={classes.avatar}>
@@ -158,40 +154,9 @@ const MlForm = ({loading, handleSubmit}: any) => {
                                                 </Button>
                                     }
                                 </Grid>
-                                <Grid item xs={12} sm={12}>
-                                    <Field name="plataforma">
-                                        {({ field}: FieldProps) => (
-                                            <>
-                                                <div className="radio-item">
-                                                    <input
-                                                        {...field}
-                                                        id="male"
-                                                        value="A"
-                                                        checked={field.value === 'A'}
-                                                        name="plataforma"
-                                                        type="radio"
-                                                    />
-                                                    <label htmlFor="male">azure</label>
-                                                </div>
-
-                                                <div className="radio-item">
-                                                    <input
-                                                        {...field}
-                                                        id="female"
-                                                        value="B"
-                                                        name="plataforma"
-                                                        checked={field.value === 'B'}
-                                                        type="radio"
-                                                    />
-                                                    <label htmlFor="female">bigml</label>
-                                                </div>
-                                            </>
-                                        )}
-                                    </Field>
-                                </Grid>
                             </Form>
                         </div>
-                    </Container>
+                    
                 )
             }}
         </Formik>

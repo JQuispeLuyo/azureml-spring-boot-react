@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 
 //CustomHooks
 import { useSnackbar } from '../../hooks/useSnackbar';
@@ -11,12 +11,13 @@ import { SnackbarC } from '../../components/Snackbar';
 
 //Config
 import { BASE_URL } from '../../config/config';
+import { Container, CssBaseline } from '@material-ui/core';
 
 export const IndexForm: React.FC = () => {
 
 
     //Snackbar
-    const { open, handleClose, handleOpen, message} = useSnackbar();
+    const { open, handleClose, handleOpen, message } = useSnackbar();
 
     //API
     const { predicts, loading, error, callApi } = useFetchMl(`${BASE_URL}`);
@@ -25,21 +26,25 @@ export const IndexForm: React.FC = () => {
     //Submit
     const handleSubmit = (values: any) => {
         handleClose();
-        const platform = values.plataforma === "A" ? "azureml" : "bigml";
-        callApi(`/api/${platform}/predict`, values, () => handleOpen("Successful!:D"));
+        callApi(`/api/ml/azure-bigml`, values, () => handleOpen("Successful!:D"));
     }
 
     useEffect(() => {
-        if(error.message !== ""){
+        if (error.message !== "") {
             handleOpen(error.message);
         }
-    }, [error,handleOpen])
+    }, [error, handleOpen])
 
     return (
         <div>
             <SnackbarC open={open} handleClose={handleClose} message={message} />
-            <MlForm loading={loading} handleSubmit={handleSubmit} />
-            <HistoryC predicts={predicts} />
+            <Container component="main" maxWidth="sm">
+                <CssBaseline />
+                <MlForm loading={loading} handleSubmit={handleSubmit} />
+
+                    <HistoryC historyItem={predicts} />
+       
+            </Container>
         </div>
     );
 }
