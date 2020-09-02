@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { Inputdata, OutPredictionDto } from '../models/Ml';
+import { Inputdata, OutPredictionDto, HistoryItem } from '../models/Ml';
 
 export const useFetchMl = (url: string) => {
 
@@ -9,7 +9,7 @@ export const useFetchMl = (url: string) => {
     */
     const isMounted = useRef(true);
 
-    const [predicts, setPredicts] = useState<OutPredictionDto[]>([])
+    const [predicts, setPredicts] = useState<HistoryItem[]>([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState({message: ""});
 
@@ -32,10 +32,11 @@ export const useFetchMl = (url: string) => {
             body: JSON.stringify(body)
         })
             .then((resp) => resp.json())
-            .then((data) => {
+            .then((data: OutPredictionDto[]) => {
                 if (isMounted.current) {
                     if(data){
-                        setPredicts([{output: data.output , probability: data.probability},...predicts])
+                        console.log([{predicts:[...data]}, ...predicts]);
+                        setPredicts([{predicts:[...data]}, ...predicts]);
                         setLoading(false)
                         callback()
                     }else{

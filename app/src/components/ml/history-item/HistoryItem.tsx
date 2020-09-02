@@ -1,10 +1,10 @@
 import React from 'react'
 import { OutPredictionDto } from './../../../models/Ml';
 
-const HistoryItem = ({output, probability}: OutPredictionDto) => {
+const HistoryItem = ({output, probability, provider}: OutPredictionDto) => {
     return (
         <div>
-            {`${output} - ${probability}`}
+            {`${provider}: ${output} | ${probability}`}
         </div>
     )
 }

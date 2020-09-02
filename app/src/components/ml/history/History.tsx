@@ -2,22 +2,32 @@ import React from 'react'
 import { History } from '../../../models/Ml'
 import { HistoryItem } from '../history-item'
 
-const HistoryC = ({ predicts }: History) => {
-    console.log("log predic", predicts);
-    return <>
-        <h1>History</h1>
-        {
-            
-            
-            predicts.map(({ output, probability }, index) =>
-                <HistoryItem
-                    key={index}
-                    output={output}
-                    probability={probability}
-                />
-            )
-        }
-    </>
+const HistoryC = ({ historyItem }: History) => {
+    console.log("log predic", historyItem);
+    return (
+        <div>
+            <h1>History</h1>
+            {
+                historyItem.map(({ predicts }, index1) => {
+                    return (
+                        <div key={index1}>
+                            {
+                                predicts.map(({ output, probability, provider }, index2) => {
+                                    return  <HistoryItem
+                                                key={index2}
+                                                output={output}
+                                                probability={probability}
+                                                provider={provider}
+                                            />
+                                })
+                            }
+                            <hr />
+                        </div>
+                    );
+                })
+            }
+        </div>
+    );
 }
 
 export default HistoryC
